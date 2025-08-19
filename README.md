@@ -1,1 +1,1 @@
-# CoseTanta-WebApp
+# CodeTanta-WebApp
