@@ -1,0 +1,27 @@
+<!-- templates/viewer.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewing: {{ filename }}</title>
+
+    <!-- Link to the Pygments-generated CSS for syntax highlighting -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='pygments_style.css') }}">
+
+    <!-- Link to our main stylesheet for layout -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container code-view-container">
+        <a href="{{ url_for('home') }}" class="back-link">&larr; Back to File List</a>
+
+        <header class="header">
+            <h1>{{ filename }}</h1>
+        </header>
+
+        <!-- The 'safe' filter is critical here -->
+        {{ code_html | safe }}
+    </div>
+</body>
+</html>

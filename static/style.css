@@ -1,0 +1,87 @@
+/* static/style.css */
+
+/* --- Global Styles & Fonts --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    margin: 0;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Header --- */
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* --- File Grid Layout --- */
+.file-grid {
+    display: grid;
+    /* Responsive grid: creates columns that are at least 280px wide */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+/* --- File Card Styling --- */
+.file-card a {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    text-decoration: none;
+    color: #34495e;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.file-card a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* --- File Icon Styling --- */
+.file-icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
+.file-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    word-break: break-all; /* Prevents long filenames from overflowing */
+}
+
+/* --- Back Link on Code View Page --- */
+.back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* --- Pygments Code Block Styling --- */
+.code-view-container .source {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}

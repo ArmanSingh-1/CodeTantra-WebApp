@@ -1,0 +1,40 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code File Viewer</title>
+    <!-- Link to the new stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📂 Code Repository Viewer</h1>
+        </header>
+
+        <ul class="file-grid">
+            {% for file in files %}
+                <li class="file-card">
+                    <a href="{{ url_for('view_code', name=file) }}">
+
+                        <!-- Logic to show different icons based on file type -->
+                        {% if file.endswith('.py') %}
+                            <span class="file-icon">🐍</span>
+                        {% elif file.endswith('.cpp') %}
+                            <span class="file-icon">🔷</span>
+                        {% else %}
+                            <span class="file-icon">📄</span>
+                        {% endif %}
+
+                        <span class="file-name">{{ file }}</span>
+                    </a>
+                </li>
+            {% else %}
+                <li>No code files found in the directory.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
