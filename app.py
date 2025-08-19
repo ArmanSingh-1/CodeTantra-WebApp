@@ -5,7 +5,7 @@ from pygments.lexers import get_lexer_for_filename
 from pygments.formatters import HtmlFormatter
 
 app = Flask(__name__)
-location = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Codes')
+location = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/Codes')
 
 @app.route('/')
 def home():
