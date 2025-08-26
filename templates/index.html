@@ -1,4 +1,3 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +6,53 @@
     <title>Code File Viewer</title>
     <!-- Link to the new stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Optional: Add some basic styling for folders */
+        .folder-card {
+            background-color: #2e3440;
+            border: 1px solid #4c566a;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-align: center;
+        }
+        .folder-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+        .folder-card a {
+            text-decoration: none;
+            color: #d8dee9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            height: 100%;
+        }
+        .folder-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #88c0d0;
+        }
+        .file-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        .go-up-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #4c566a;
+            color: #d8dee9;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+        .go-up-button:hover {
+            background-color: #5e6b7b;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -14,11 +60,26 @@
             <h1>📂 Code Repository Viewer</h1>
         </header>
 
+        {% if path %}
+            <!-- This button only shows up when you are in a subdirectory -->
+            <a href="{{ url_for('list_contents', path=path.rsplit('/', 1)[0] if '/' in path else '') }}" class="go-up-button">&larr; Go Up</a>
+        {% endif %}
+
         <ul class="file-grid">
+            <!-- Loop through folders first -->
+            {% for folder in folders %}
+                <li class="file-card folder-card">
+                    <a href="{{ url_for('list_contents', path=(path + '/' + folder) if path else folder) }}">
+                        <span class="folder-icon">📁</span>
+                        <span class="file-name">{{ folder }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+
+            <!-- Loop through files second -->
             {% for file in files %}
                 <li class="file-card">
-                    <a href="{{ url_for('view_code', name=file) }}">
-
+                    <a href="{{ url_for('list_contents', path=(path + '/' + file) if path else file) }}">
                         <!-- Logic to show different icons based on file type -->
                         {% if file.endswith('.py') %}
                             <span class="file-icon">🐍</span>
@@ -27,12 +88,13 @@
                         {% else %}
                             <span class="file-icon">📄</span>
                         {% endif %}
-
                         <span class="file-name">{{ file }}</span>
                     </a>
                 </li>
             {% else %}
-                <li>No code files found in the directory.</li>
+                {% if not folders and not files %}
+                    <li>No code files found in this directory.</li>
+                {% endif %}
             {% endfor %}
         </ul>
     </div>

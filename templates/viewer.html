@@ -14,7 +14,8 @@
 </head>
 <body>
     <div class="container code-view-container">
-        <a href="{{ url_for('home') }}" class="back-link">&larr; Back to File List</a>
+        <!-- The back link now uses the parent_path variable to navigate up one level -->
+        <a href="{{ url_for('list_contents', path=parent_path) }}" class="back-link">&larr; Back to File List</a>
 
         <header class="header">
             <h1>{{ filename }}</h1>
